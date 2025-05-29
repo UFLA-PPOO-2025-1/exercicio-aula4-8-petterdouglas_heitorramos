@@ -62,6 +62,9 @@ public class Simulador
         GeradorDePopulacoes.definirCores(visao);
         visoes.add(visao);
         
+        visao = new VisaoDeTexto();
+        visoes.add(visao);
+
         // Configura um ponto de partida válido.
         reiniciar();
     }
@@ -72,7 +75,7 @@ public class Simulador
      */
     public void executarSimulacaoLonga()
     {
-        // altere o parâmetro de atraso se quiser executar mais lentamente
+        // altere o pa0râmetro de atraso se quiser executar mais lentamente
         simular(4000, 0);
     }
     
@@ -125,7 +128,7 @@ public class Simulador
         passo = 0;
         animais.clear();
         for (VisaoSimulador visao : visoes) {
-            visao.reiniciar();
+            visao.reiniciar();?>
         }
 
         GeradorDePopulacoes.povoar(campo, animais);
@@ -164,7 +167,7 @@ public class Simulador
             Thread.sleep(milissegundos);
         }
         catch (InterruptedException ie) {
-            // acorda
+            // acorda 
         }
     }
 }
