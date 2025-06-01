@@ -128,7 +128,7 @@ public class Simulador
         passo = 0;
         animais.clear();
         for (VisaoSimulador visao : visoes) {
-            visao.reiniciar();?>
+            visao.reiniciar();
         }
 
         GeradorDePopulacoes.povoar(campo, animais);

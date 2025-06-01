@@ -4,7 +4,7 @@ public class VisaoDeTexto implements VisaoSimulador {
 
     private EstatisticasCampo estatisticas;
 
-    public VisaoDeTexto(){
+    public VisaoDeTexto() {
         estatisticas = new EstatisticasCampo();
     }
 
@@ -18,19 +18,21 @@ public class VisaoDeTexto implements VisaoSimulador {
         return estatisticas.ehViavel(campo);
     }
 
+    // Mostra no terminal a quantidade de raposas e coelhos existem em um
+    // determinado passo
     @Override
     public void mostrarStatus(int passo, Campo campo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mostrarStatus'");
+        estatisticas.reiniciar();
+        System.out.println("Passo " + passo + " - " + estatisticas.obterDetalhesPopulacao(campo));
     }
 
     @Override
     public void reiniciar() {
-        
+        estatisticas.reiniciar();
     }
 
     @Override
     public void reabilitarOpcoes() {
         // método não necessário nessa classe
     }
-} 
+}
