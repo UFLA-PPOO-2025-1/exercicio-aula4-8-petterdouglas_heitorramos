@@ -20,7 +20,7 @@ public class GeradorDePopulacoes {
     /**
      * Povoa aleatoriamente o campo com animais.
      */
-    public static void povoar(Campo campo, List<Animal> animais)
+    public static void povoar(Campo campo, List<Ator> animais)
     {
         Random rand = Randomizador.obterRandom();
         campo.limpar();
