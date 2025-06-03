@@ -18,8 +18,8 @@ public class Simulador
     // O comprimento padrão da grade.
     private static final int COMPRIMENTO_PADRAO = 80;
 
-    // Lista de animais no campo.
-    private List<Animal> animais;
+    // Lista de seres vivos no campo.
+    private List<Ator> seresVivos;
     // O estado atual do campo.
     private Campo campo;
     // O passo atual da simulação.
@@ -49,7 +49,7 @@ public class Simulador
             largura = LARGURA_PADRAO;
         }
         
-        animais = new ArrayList<>();
+        seresVivos = new ArrayList<>();
         campo = new Campo(comprimento, largura);
 
         visoes = new ArrayList<>();
@@ -62,6 +62,9 @@ public class Simulador
         GeradorDePopulacoes.definirCores(visao);
         visoes.add(visao);
         
+        visao = new VisaoDeTexto();
+        visoes.add(visao);
+
         // Configura um ponto de partida válido.
         reiniciar();
     }
@@ -72,7 +75,7 @@ public class Simulador
      */
     public void executarSimulacaoLonga()
     {
-        // altere o parâmetro de atraso se quiser executar mais lentamente
+        // altere o pa0râmetro de atraso se quiser executar mais lentamente
         simular(4000, 0);
     }
     
@@ -100,19 +103,19 @@ public class Simulador
     {
         passo++;
 
-        // Fornece espaço para os animais recém-nascidos.
-        List<Animal> novosAnimais = new ArrayList<>(); 
+        // Fornece espaço para os seresVivos recém-nascidos.
+        List<Ator> novosSeresVivos = new ArrayList<>(); 
         // Permite que todos os ns ajam.
-        for(Iterator<Animal> it = animais.iterator(); it.hasNext(); ) {
-            Animal animal = it.next();
-            animal.agir(novosAnimais);
-            if(!animal.estaVivo()) {
+        for(Iterator<Ator> it = seresVivos.iterator(); it.hasNext(); ) {
+            Ator serVivo = it.next();
+            serVivo.agir(novosSeresVivos);
+            if(!serVivo.estaAtivo()) {
                 it.remove();
             }
         }
         
-        // Adiciona os animais recém-nascidos às listas principais.
-        animais.addAll(novosAnimais);
+        // Adiciona os seresVivos recém-nascidos às listas principais.
+        seresVivos.addAll(novosSeresVivos);
 
         atualizarVisoes();
     }
@@ -123,12 +126,12 @@ public class Simulador
     public void reiniciar()
     {
         passo = 0;
-        animais.clear();
+        seresVivos.clear();
         for (VisaoSimulador visao : visoes) {
             visao.reiniciar();
         }
 
-        GeradorDePopulacoes.povoar(campo, animais);
+        GeradorDePopulacoes.povoar(campo, seresVivos);
         
         atualizarVisoes();
         reabilitarOpcoesVisoes();
@@ -164,7 +167,7 @@ public class Simulador
             Thread.sleep(milissegundos);
         }
         catch (InterruptedException ie) {
-            // acorda
+            // acorda 
         }
     }
 }
