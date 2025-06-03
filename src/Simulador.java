@@ -18,8 +18,8 @@ public class Simulador
     // O comprimento padrão da grade.
     private static final int COMPRIMENTO_PADRAO = 80;
 
-    // Lista de animais no campo.
-    private List<Ator> animais;
+    // Lista de seres vivos no campo.
+    private List<Ator> seresVivos;
     // O estado atual do campo.
     private Campo campo;
     // O passo atual da simulação.
@@ -49,7 +49,7 @@ public class Simulador
             largura = LARGURA_PADRAO;
         }
         
-        animais = new ArrayList<>();
+        seresVivos = new ArrayList<>();
         campo = new Campo(comprimento, largura);
 
         visoes = new ArrayList<>();
@@ -103,19 +103,19 @@ public class Simulador
     {
         passo++;
 
-        // Fornece espaço para os animais recém-nascidos.
-        List<Ator> novosAnimais = new ArrayList<>(); 
+        // Fornece espaço para os seresVivos recém-nascidos.
+        List<Ator> novosSeresVivos = new ArrayList<>(); 
         // Permite que todos os ns ajam.
-        for(Iterator<Ator> it = animais.iterator(); it.hasNext(); ) {
-            Ator animal = it.next();
-            animal.agir(novosAnimais);
-            if(!animal.estaAtivo()) {
+        for(Iterator<Ator> it = seresVivos.iterator(); it.hasNext(); ) {
+            Ator serVivo = it.next();
+            serVivo.agir(novosSeresVivos);
+            if(!serVivo.estaAtivo()) {
                 it.remove();
             }
         }
         
-        // Adiciona os animais recém-nascidos às listas principais.
-        animais.addAll(novosAnimais);
+        // Adiciona os seresVivos recém-nascidos às listas principais.
+        seresVivos.addAll(novosSeresVivos);
 
         atualizarVisoes();
     }
@@ -126,12 +126,12 @@ public class Simulador
     public void reiniciar()
     {
         passo = 0;
-        animais.clear();
+        seresVivos.clear();
         for (VisaoSimulador visao : visoes) {
             visao.reiniciar();
         }
 
-        GeradorDePopulacoes.povoar(campo, animais);
+        GeradorDePopulacoes.povoar(campo, seresVivos);
         
         atualizarVisoes();
         reabilitarOpcoesVisoes();
